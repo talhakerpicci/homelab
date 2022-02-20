@@ -1,0 +1,196 @@
+ appConfig:
+  theme: nord
+  layout: vertical
+  iconSize: large
+  language: en
+  startingView: default
+  defaultOpeningMethod: newtab
+  statusCheck: false
+  statusCheckInterval: 0
+  faviconApi: allesedv
+  routingMode: history
+  enableMultiTasking: false
+  widgetsAlwaysUseProxy: false
+  webSearch:
+    disableWebSearch: false
+    searchEngine: duckduckgo
+    openingMethod: newtab
+    searchBangs: {}
+  enableFontAwesome: true
+  hideComponents:
+    hideHeading: false
+    hideNav: false
+    hideSearch: false
+    hideSettings: false
+    hideFooter: false
+  auth:
+    enableGuestAccess: false
+    users: []
+    enableKeycloak: false
+  showSplashScreen: false
+  preventWriteToDisk: false
+  preventLocalSave: false
+  disableConfiguration: false
+  allowConfigEdit: true
+  enableServiceWorker: false
+  disableContextMenu: false
+  disableUpdateChecks: false
+  disableSmartSort: false
+  enableErrorReporting: false
+pageInfo:
+  title: Home Lab
+  description: Welcome to your new dashboard!
+  navLinks:
+    - title: GitHub
+      path: https://github.com/Lissy93/dashy
+    - title: Documentation
+      path: https://dashy.to/docs
+  footerText: Built with Love
+sections:
+  - name: Media
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: JellyFin
+        description: Media Center
+        icon: /icons/jellyfin.png
+        url: ''
+        target: newtab
+        id: 0_480_jellyfin
+      - title: qBitTorrent
+        description: Torrent Client
+        icon: /icons/qbittorrent.png
+        url: http://192.168.0.26:9090/
+        target: newtab
+        id: 1_480_qbittorrent
+      - title: Sonarr
+        description: TV Show Manager
+        icon: /icons/sonarr.svg
+        url: http://192.168.0.26:8989/
+        target: newtab
+        id: 2_480_sonarr
+      - title: Radarr
+        description: Movie Manager
+        icon: /icons/radarr.png
+        url: http://192.168.0.26:7878/
+        target: newtab
+        id: 3_480_radarr
+      - title: Bazarr
+        description: Subtitle Manager
+        icon: /icons/bazarr.png
+        url: http://192.168.0.26:6767/series
+        target: newtab
+        id: 4_480_bazarr
+      - title: Jacket
+        description: Indexers Management
+        icon: /icons/jacket.png
+        url: http://192.168.0.26:9117/UI/Dashboard
+        target: newtab
+        id: 5_480_jacket
+  - name: System Monitoring
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Grafana
+        description: Server Monitoring Dashboard
+        icon: /icons/grafana.png
+        url: >-
+          http://192.168.0.26:3000/d/rYdddlPWk/node-exporter-full?orgId=1&refresh=1m
+        target: newtab
+        id: 0_1739_grafana
+      - title: Prometheus
+        description: Monitoring System
+        icon: /icons/prometheus.png
+        url: http://192.168.0.26:4343
+        target: newtab
+        id: 1_1739_prometheus
+      - title: Cadvisor
+        description: Resource Usage Analyzer
+        icon: /icons/cadvisor.png
+        url: http://192.168.0.26:5858/containers/
+        target: newtab
+        id: 2_1739_cadvisor
+  - name: Networking
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Pihole
+        description: DNS Adblocker
+        icon: /icons/pihole.png
+        url: http://192.168.0.25/admin/
+        target: newtab
+        id: 0_1064_pihole
+      - title: Uptime Kuma
+        description: Monitoring Tool
+        icon: /icons/uptime-kuma.png
+        url: http://192.168.0.26:3434/
+        target: newtab
+        id: 1_1064_uptimekuma
+      - title: Router
+        description: Gateway
+        icon: /icons/router.png
+        url: http://192.168.0.1/
+        target: newtab
+        id: 2_1064_router
+  - name: Productivity
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Bookstack
+        description: Information Manager
+        icon: /icons/bookstack.png
+        url: http://192.168.0.26:6875/
+        target: newtab
+        id: 0_1302_bookstack
+      - title: Shiori
+        description: Bookmark Manager
+        icon: /icons/shiori.png
+        url: http://192.168.0.26:5454/
+        target: newtab
+        id: 1_1302_shiori
+      - title: Tube Archivist
+        description: Youtube Downloader
+        icon: /icons/tube-archivist.png
+        url: http://192.168.0.26:7474/
+        target: newtab
+        id: 2_1302_tubearchivist
+      - title: Portainer
+        description: Container Management
+        icon: /icons/portainer.svg
+        url: https://192.168.0.26:9443/
+        target: newtab
+        id: 3_1302_portainer
+      - title: Linkding
+        description: Bookmark Manager
+        icon: /icons/linkding.png
+        url: http://192.168.0.25:8002
+        target: newtab
+        id: 4_1302_linkding
+      - title: Code Server
+        description: Remote VS Code Editor
+        icon: /icons/vscode.png
+        url: http://192.168.0.26:8443/
+        target: newtab
+        id: 5_1302_codeserver
+      - title: File Browser
+        description: Storage Management
+        icon: /icons/file-browser.png
+        url: http://192.168.0.25:8001/
+        target: newtab
+        id: 6_1302_filebrowser
