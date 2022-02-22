@@ -39,6 +39,27 @@ https://nixcp.com/format-mount-disk-larger-2tb-linux/
 
 - When setting up the HDD for other services to use, change ownership to debian:debian
 
+- Install amd gpu drivers: ` sudo apt-get install firmware-amd-graphics libgl1-mesa-dri libglx-mesa0 mesa-vulkan-drivers lshw radeontop` (add non free repos to sources.list in case needed)
+
+- Reboot after installing drivers. Run the followings to see if everything is fine:
+
+```
+sudo lshw -c video
+find /dev -group video
+modinfo -V radeon
+lspci -nn | grep -E 'VGA|Display'
+```
+
+- Lastly run `sudo radeontop` to see usage stats
+
+- Check followings if you stuck
+
+```
+https://github.com/jellyfin/jellyfin/issues/3927
+https://jellyfin.org/docs/general/administration/hardware-acceleration.html
+https://wiki.archlinux.org/title/Hardware_video_acceleration#ATI/AMD
+```
+
 ## Docker and Portainer
 
 - Add services as stack
