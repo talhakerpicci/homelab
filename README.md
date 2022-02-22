@@ -2,6 +2,8 @@
  
 Configurations and docker-compose files of my homelab
 
+![dashboard](dashy/my_dashboard.png)
+
 ## Server Setup
 
 - Install and setup debian: https://www.debian.org/distrib/netinst (amd64)
