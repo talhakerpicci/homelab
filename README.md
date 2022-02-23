@@ -6,13 +6,18 @@ Configurations and docker-compose files of my homelab
 
 ## Server Setup
 
-- Install and setup debian: https://www.debian.org/distrib/netinst (amd64)
+- Install and setup debian: https://www.debian.org/distrib/netinst (amd64) (!! BOOT IN UEFI MODE !!)
+
+- Install sudo `apt-get install sudo -y`
+
+- Give your user permissions `usermod -aG sudo yourusername`
+
 - Add sudo user
-- Delete dhcp by running `sudo apt-get remove dhcpcd5 isc-dhcp-client isc-dhcp-common`
+
 - Update interface with the following for static ip:
 
 ```
-nano /etc/network/interface
+nano /etc/network/interfaces
 
 # This file describes the network interfaces available on your system
 # and how to activate them. For more information, see interfaces(5).
@@ -31,17 +36,13 @@ address 192.168.0.26/24
 gateway 192.168.0.1
 ```
 
-- Install docker
-- Partition the HDD. Guides to follow:
+- Delete dhcp by running `sudo apt-get remove isc-dhcp-client isc-dhcp-common`
 
-```
-https://www.tecmint.com/add-disk-larger-than-2tb-to-an-existing-linux/
-https://nixcp.com/format-mount-disk-larger-2tb-linux/
-```
+- Add non free and contrib repos in `/etc/apt/sources.list` and run `sudo apt-get update`
 
-- When setting up the HDD for other services to use, change ownership to debian:debian
+- Install essential packages: `sudo apt-get install htop neofetch git build-essential `
 
-- Install amd gpu drivers: ` sudo apt-get install firmware-amd-graphics libgl1-mesa-dri libglx-mesa0 mesa-vulkan-drivers lshw radeontop` (add non free repos to sources.list in case needed)
+- Install amd gpu drivers: ` sudo apt-get install firmware-amd-graphics libgl1-mesa-dri libglx-mesa0 mesa-vulkan-drivers lshw radeontop`
 
 - Reboot after installing drivers. Run the followings to see if everything is fine:
 
@@ -54,7 +55,7 @@ lspci -nn | grep -E 'VGA|Display'
 
 - Lastly run `sudo radeontop` to see usage stats
 
-- Check followings if you stuck
+- Check followings if you stuck about setting up drivers:
 
 ```
 https://github.com/jellyfin/jellyfin/issues/3927
@@ -62,9 +63,63 @@ https://jellyfin.org/docs/general/administration/hardware-acceleration.html
 https://wiki.archlinux.org/title/Hardware_video_acceleration#ATI/AMD
 ```
 
+- Docker installation:
+
+```
+sudo apt-get update
+
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+sudo usermod -aG docker $USER
+```
+
+- Partition the HDD. Guides to follow:
+
+```
+https://www.tecmint.com/add-disk-larger-than-2tb-to-an-existing-linux/
+https://nixcp.com/format-mount-disk-larger-2tb-linux/
+```
+
+- Change ownership of the /hdd: `sudo chown -R debian:debian /hdd`
+
+- Add the following to `/etc/fstab`:
+
+```
+/dev/sda1 /hdd auto nosuid,nodev,nofail,x-gvfs-show 0 0
+```
+
+- Done! Add your services to portainer
+
 ## Docker and Portainer
 
+- Portainer installation (checkout: official page for latest version):
+
+```
+docker volume create portainer_data
+
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v portainer_data:/data \
+    portainer/portainer-ce:2.11.1
+```
+
 - Add services as stack
+
 - Change the default ip address in portainer
 
 ## Notes
