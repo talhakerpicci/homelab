@@ -92,13 +92,13 @@ https://www.tecmint.com/add-disk-larger-than-2tb-to-an-existing-linux/
 https://nixcp.com/format-mount-disk-larger-2tb-linux/
 ```
 
-- Change ownership of the /hdd: `sudo chown -R debian:debian /hdd`
-
 - Add the following to `/etc/fstab`:
 
 ```
 /dev/sda1 /hdd auto nosuid,nodev,nofail,x-gvfs-show 0 0
 ```
+
+- Change ownership of the /hdd: `sudo chown -R debian:debian /hdd`
 
 - Done! Add your services to portainer
 
