@@ -12,8 +12,6 @@ Configurations and docker-compose files of my homelab
 
 - Give your user permissions `usermod -aG sudo yourusername`
 
-- Add sudo user
-
 - Update interface with the following for static ip:
 
 ```
