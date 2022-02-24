@@ -133,3 +133,10 @@ Session\DisableAutoTMMByDefault=false
 Session\DisableAutoTMMTriggers\CategoryChanged=false
 Session\DisableAutoTMMTriggers\DefaultSavePathChanged=true
 ```
+
+## Services to Try Later
+
+* gotify
+* librespeed
+* lidarr
+* nginx proxy manager
