@@ -1,0 +1,66 @@
+version: '3'
+
+# docker volume create prometheus_data
+# docker volume create grafana_data
+
+# Grafana dashboard id's: 1860, 14282
+
+volumes:
+  prometheus-data:
+    name: prometheus_data
+    driver: local
+  grafana-data:
+    name: grafana_data
+    driver: local
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "4343:9090"
+    volumes:
+      - /home/debian/docker/prometheus:/etc/prometheus
+      - prometheus-data:/data
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: unless-stopped
+    
+  node_exporter:
+    image: quay.io/prometheus/node-exporter
+    container_name: node_exporter
+    ports:
+      - "9100:9100"
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave'
+      
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    container_name: cadvisor
+    privileged: true
+    ports:
+      - "5858:8080"
+    devices:
+      - /dev/kmsg:/dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    restart: unless-stopped
+ 

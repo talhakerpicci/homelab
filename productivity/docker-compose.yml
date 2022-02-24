@@ -1,0 +1,58 @@
+version: "2.1"
+
+services:
+  bookstack:
+    image: lscr.io/linuxserver/bookstack
+    container_name: bookstack
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - APP_URL=
+      - DB_HOST=bookstack_db
+      - DB_USER=bookstack
+      - DB_PASS=admin
+      - DB_DATABASE=bookstackapp
+    volumes:
+      - /home/debian/docker/bookstack/config:/config
+    ports:
+      - 6875:80
+    restart: unless-stopped
+    depends_on:
+      - bookstack_db
+  bookstack_db:
+    image: lscr.io/linuxserver/mariadb
+    container_name: bookstack_db
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=admin
+      - TZ=Europe/London
+      - MYSQL_DATABASE=bookstackapp
+      - MYSQL_USER=bookstack
+      - MYSQL_PASSWORD=admin
+    volumes:
+      - /home/debian/docker/bookstack/db_config:/config
+    restart: unless-stopped
+    
+  shiori:
+    image: radhifadlillah/shiori
+    container_name: shiori
+    volumes:
+      - /home/debian/docker/shiori:/srv/shiori
+    ports:
+      - 5454:8080
+    restart: unless-stopped
+    
+  code-server:
+    image: lscr.io/linuxserver/code-server
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Istanbul
+    volumes:
+      - /home/debian/docker/vscode/config:/config
+    ports:
+      - 8443:8443
+    restart: unless-stopped
+ 

@@ -1,0 +1,22 @@
+ version: "2.1"
+ services:
+   jellyfin:
+     image: lscr.io/linuxserver/jellyfin
+     container_name: jellyfin
+     environment:
+       - PUID=1000
+       - PGID=1000
+       - TZ=Europe/Istanbul
+       - DOCKER_MODS=linuxserver/mods:jellyfin-amd
+     volumes:
+       - /hdd/appdata/config/jellyfin:/config
+       - /hdd/data/media:/data/media
+     ports:
+       - 8096:8096
+       - 8920:8920 #optional
+       - 7359:7359/udp #optional
+       - 1900:1900/udp #optional
+     devices:
+       - /dev/dri:/dev/dri
+     restart: unless-stopped
+ 
