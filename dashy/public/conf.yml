@@ -57,37 +57,37 @@ sections:
     items:
       - title: JellyFin
         description: Media Center
-        icon: /icons/jellyfin.png
+        icon: jellyfin.png
         url: http://192.168.0.26:8096/
         target: newtab
         id: 0_480_jellyfin
       - title: qBitTorrent
         description: Torrent Client
-        icon: /icons/qbittorrent.png
+        icon: qbittorrent.png
         url: http://192.168.0.26:9090/
         target: newtab
         id: 1_480_qbittorrent
       - title: Sonarr
         description: TV Show Manager
-        icon: /icons/sonarr.svg
+        icon: sonarr.svg
         url: http://192.168.0.26:8989/
         target: newtab
         id: 2_480_sonarr
       - title: Radarr
         description: Movie Manager
-        icon: /icons/radarr.png
+        icon: radarr.png
         url: http://192.168.0.26:7878/
         target: newtab
         id: 3_480_radarr
       - title: Bazarr
         description: Subtitle Manager
-        icon: /icons/bazarr.png
+        icon: bazarr.png
         url: http://192.168.0.26:6767/series
         target: newtab
         id: 4_480_bazarr
       - title: Jacket
         description: Indexers Management
-        icon: /icons/jacket.png
+        icon: jacket.png
         url: http://192.168.0.26:9117/UI/Dashboard
         target: newtab
         id: 5_480_jacket
@@ -101,20 +101,20 @@ sections:
     items:
       - title: Grafana
         description: Server Monitoring Dashboard
-        icon: /icons/grafana.png
+        icon: grafana.png
         url: >-
           http://192.168.0.26:3000/d/rYdddlPWk/node-exporter-full?orgId=1&refresh=1m
         target: newtab
         id: 0_1739_grafana
       - title: Prometheus
         description: Monitoring System
-        icon: /icons/prometheus.png
+        icon: prometheus.png
         url: http://192.168.0.26:4343
         target: newtab
         id: 1_1739_prometheus
       - title: Cadvisor
         description: Resource Usage Analyzer
-        icon: /icons/cadvisor.png
+        icon: cadvisor.png
         url: http://192.168.0.26:5858/containers/
         target: newtab
         id: 2_1739_cadvisor
@@ -128,19 +128,19 @@ sections:
     items:
       - title: Pihole
         description: DNS Adblocker
-        icon: /icons/pihole.png
+        icon: pihole.png
         url: http://192.168.0.25/admin/
         target: newtab
         id: 0_1064_pihole
       - title: Uptime Kuma
         description: Monitoring Tool
-        icon: /icons/uptime-kuma.png
-        url: http://192.168.0.26:3434/
+        icon: uptime-kuma.png
+        url: http://192.168.0.26:3001
         target: newtab
         id: 1_1064_uptimekuma
       - title: Router
         description: Gateway
-        icon: /icons/router.png
+        icon: router.png
         url: http://192.168.0.1/
         target: newtab
         id: 2_1064_router
@@ -154,43 +154,43 @@ sections:
     items:
       - title: Bookstack
         description: Information Manager
-        icon: /icons/bookstack.png
+        icon: bookstack.png
         url: http://192.168.0.26:6875/
         target: newtab
         id: 0_1302_bookstack
       - title: Shiori
         description: Bookmark Manager
-        icon: /icons/shiori.png
+        icon: shiori.png
         url: http://192.168.0.26:5454/
         target: newtab
         id: 1_1302_shiori
       - title: Tube Archivist
         description: Youtube Downloader
-        icon: /icons/tube-archivist.png
+        icon: tube-archivist.png
         url: http://192.168.0.26:7474/
         target: newtab
         id: 2_1302_tubearchivist
       - title: Portainer
         description: Container Management
-        icon: /icons/portainer.svg
+        icon: portainer.svg
         url: https://192.168.0.26:9443/
         target: newtab
         id: 3_1302_portainer
       - title: Linkding
         description: Bookmark Manager
-        icon: /icons/linkding.png
+        icon: linkding.png
         url: http://192.168.0.25:8002
         target: newtab
         id: 4_1302_linkding
       - title: Code Server
         description: Remote VS Code Editor
-        icon: /icons/vscode.png
+        icon: vscode.png
         url: http://192.168.0.26:8443/
         target: newtab
         id: 5_1302_codeserver
       - title: File Browser
         description: Storage Management
-        icon: /icons/file-browser.png
+        icon: file-browser.png
         url: http://192.168.0.25:8001/
         target: newtab
         id: 6_1302_filebrowser
