@@ -1,48 +1,49 @@
 # My Homelab
- 
+
 Configurations and docker-compose files of my homelab
 
 ![dashboard](dashy/my_dashboard.png)
 
 ## Server Setup
 
-- Install and setup debian: https://www.debian.org/distrib/netinst (amd64) (!! BOOT IN UEFI MODE !!)
+- Checkout [this](./debian.md) for debian server installation.
 
-- Install sudo `apt-get install sudo -y`
+- Install and setup rocky: https://rockylinux.org/download (!! BOOT IN UEFI MODE !!)
 
-- Give your user permissions `usermod -aG sudo yourusername`
+- Give your user permissions `usermod -a -G wheel rocky`
 
-- Update interface with the following for static ip:
+- Update the config with the following for static ip:
 
 ```
-nano /etc/network/interfaces
+sudo nano /etc/sysconfig/network-scripts/ifcfg-enp2s0
 
-# This file describes the network interfaces available on your system
-# and how to activate them. For more information, see interfaces(5).
-
-source /etc/network/interfaces.d/*
-
-# The loopback network interface
-auto lo
-iface lo inet loopback
-
-# The primary network interface
-auto enp2s0
-allow-hotplug enp2s0
-iface enp2s0 inet static
-address 192.168.0.26/24
-gateway 192.168.0.1
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=none
+IPADDR=192.168.0.26
+GATEWAY=192.168.0.1
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+NAME=enp2s0
+UUID=39e829f8-329b-460d-bef6-05695458de7d
+DEVICE=enp2s0
+ONBOOT=yes
 ```
 
-- Delete dhcp by running `sudo apt-get remove isc-dhcp-client isc-dhcp-common`
+- Update all packages: `sudo dnf upgrade`
 
-- Add non free and contrib repos in `/etc/apt/sources.list` and run `sudo apt-get update`
+- Add EPEL repository: `sudo dnf install epel-release`
 
-- Install essential packages: `sudo apt-get install htop neofetch git build-essential `
+- Install essential packages: `sudo dnf install neofetch htop git radeontop`
 
-- Install amd gpu drivers: ` sudo apt-get install firmware-amd-graphics libgl1-mesa-dri libglx-mesa0 mesa-vulkan-drivers lshw radeontop`
+- Reboot
 
-- Reboot after installing drivers. Run the followings to see if everything is fine:
+- Lastly run `sudo radeontop` to see usage stats, and the followings to see all fine:
 
 ```
 sudo lshw -c video
@@ -51,38 +52,22 @@ modinfo -V radeon
 lspci -nn | grep -E 'VGA|Display'
 ```
 
-- Lastly run `sudo radeontop` to see usage stats
-
-- Check followings if you stuck about setting up drivers:
-
-```
-https://github.com/jellyfin/jellyfin/issues/3927
-https://jellyfin.org/docs/general/administration/hardware-acceleration.html
-https://wiki.archlinux.org/title/Hardware_video_acceleration#ATI/AMD
-```
-
 - Docker installation:
 
 ```
-sudo apt-get update
+sudo yum install -y yum-utils
 
-sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
 
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+sudo yum install docker-ce docker-ce-cli containerd.io
 
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-sudo apt-get update
-
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo systemctl start docker
 
 sudo usermod -aG docker $USER
+
+sudo systemctl enable docker.service
 ```
 
 - Partition the HDD. Guides to follow:
@@ -98,7 +83,7 @@ https://nixcp.com/format-mount-disk-larger-2tb-linux/
 /dev/sda1 /hdd auto nosuid,nodev,nofail,x-gvfs-show 0 0
 ```
 
-- Change ownership of the /hdd: `sudo chown -R debian:debian /hdd`
+- Change ownership of the /hdd: `sudo chown -R rocky:rocky /hdd`
 
 - Done! Add your services to portainer
 
